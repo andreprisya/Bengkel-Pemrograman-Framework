@@ -16,6 +16,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Halaman Login</h1>
                                     </div>
+                                    <?= $this->session->flashdata('message'); ?>
                                     <form class="user">
                                         <div class="form-group">
                                             <input type="email" name="email" class="form-control form-control-user"

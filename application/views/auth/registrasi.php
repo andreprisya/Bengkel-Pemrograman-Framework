@@ -8,7 +8,7 @@
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Buat Akun</h1>
                         </div>
-                        <form class="user">
+                        <form class="user" action="<?= base_url('Auth/cek_regis')?>" method="POST">
                             <div class="form-group">
                                 <input type="text" name="nama" class="form-control form-control-user" id="nama" placeholder="Nama Lengkap">
                             </div>
