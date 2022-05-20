@@ -22,11 +22,53 @@ class Mahasiswa extends CI_Controller
     function tambah()
     {
         $data['judul'] = "Halaman Tambah Mahasiswa";
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['prodi'] = $this->Prodi_model->get();
-        $this->load->view("layout/header");
-        $this->load->view("mahasiswa/vw_tambah_mahasiswa", $data);
-        $this->load->view("layout/footer");
+        $this->form_validation->set_rules('nama', 'Nama Mahasiswa', 'required', ['required' => 'Nama Mahasiswa Wajib di isi'
+        ]);
+        $this->form_validation->set_rules('nim', 'NIM', 'required', [
+            'required' => 'NIM Mahasiswa Wajib di isi'
+        ]);
+        $this->form_validation->set_rules('email', 'Email', 'required', [
+            'required' => 'Email Mahasiswa Wajib di isi'
+        ]);
+        $this->form_validation->set_rules('prodi', 'Prodi', 'required', [
+            'required' => 'Prodi Mahasiswa Wajib di isi'
+        ]);
+        $this->form_validation->set_rules('alamat', 'Alamat', 'required', [
+            'required' => 'Alamat Mahasiswa Wajib di isi'
+        ]);
+        $this->form_validation->set_rules('asal_sekolah', 'Asal Sekolah', 'required', [
+            'required' => 'Asal Sekolah Mahasiswa Wajib di isi'
+        ]);
+        $this->form_validation->set_rules('no_hp', 'No HP', 'required|integer', [
+            'required' => 'NO HP Mahasiswa Wajib di isi',
+            'integer' => 'NO HP harus Angka'
+        ]);
+        $this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'required', [
+            'required' => 'Jenis Kelamin Mahasiswa Wajib di isi',
+        ]);
+        if ($this->form_validation->run() == false) {
+            $this->load->view("layout/header", $data);
+            $this->load->view("mahasiswa/vw_tambah_mahasiswa", $data);
+            $this->load->view("layout/footer");
+        } else {
+            $data = [
+                'nama' => $this->input->post('nama'),
+                'nim' => $this->input->post('nim'),
+                'email' => $this->input->post('email'),
+                'prodi' => $this->input->post('prodi'),
+                'alamat' => $this->input->post('alamat'),
+                'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+                'no_hp' => $this->input->post('no_hp'),
+                'asal_sekolah' => $this->input->post('asal_sekolah'),
+            ];
+            $this->Mahasiswa_model->insert($data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Mahasiswa Berhasil Ditambah!</div>');
+            redirect('Mahasiswa');
+        }
     }
+
 
     function detail()
     {
@@ -34,22 +76,6 @@ class Mahasiswa extends CI_Controller
         $this->load->view("layout/header");
         $this->load->view("mahasiswa/vw_detail_mahasiswa", $data);
         $this->load->view("layout/footer");
-    }
-
-    function upload()
-    {
-        $data = [
-            'nama' => $this->input->post('nama'),
-            'nim' => $this->input->post('nim'),
-            'email' => $this->input->post('email'),
-            'prodi' => $this->input->post('prodi'),
-            'alamat' => $this->input->post('alamat'),
-            'jenis_kelamin' => $this->input->post('jenis_kelamin'),
-            'no_hp' => $this->input->post('no_hp'),
-            'asal_sekolah' => $this->input->post('asal_sekolah')
-        ];
-        $this->Mahasiswa_model->insert($data);
-        redirect('Mahasiswa');
     }
 
     function edit($id)
@@ -79,4 +105,3 @@ class Mahasiswa extends CI_Controller
         redirect('Mahasiswa');
     }
 }
-?>

@@ -19,21 +19,24 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php $i = 1; ?>
+                    <?php foreach ($prodi as $us): ?>
                     <tr>
-                        <td>1</td>
-                        <td>Teknik Informatika</td>
-                        <td>328</td>
-                        <td>JTI</td>
-                        <td>A</td>
-                        <td>Kartina Diah Kusuma Wardhani, S.T., M.T.</td>
-                        <td>2008</td>
-                        <td>Multimedia</td>
+                        <td><?= $i; ?>.</td>
+                        <td><?= $us['nama']; ?></td>
+                        <td><?= $us['ruangan']; ?></td>
+                        <td><?= $us['jurusan']; ?></td>
+                        <td><?= $us['akreditasi']; ?></td>
+                        <td><?= $us['nama_kaprodi']; ?></td>
+                        <td><?= $us['tahun_berdiri']; ?></td>
+                        <td><?= $us['output_lulusan']; ?></td>
                         <td>
-                            <a href="" class="badge badge-danger">Hapus</a>
-                            <a href="" class="badge badge-warning">Edit</a>
-                            <a href="" class="badge badge-info">Detail</a>
+                            <a href="<?= base_url('Prodi/hapus/') . $us['id']; ?>" class="badge badge-danger">Hapus</a>
+                            <a href="<?= base_url('Prodi/edit/') . $us['id']; ?>" class="badge badge-warning">Edit</a>
                         </td>
                     </tr>
+                    <?php $i++; ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
