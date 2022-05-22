@@ -44,6 +44,17 @@ class Prodi_model extends CI_Model
         $this->db->delete($this->table);
         return $this->db->affected_rows();
     }
+    
+    public function edit($id)
+    {
+        $data['judul'] = "Halaman Edit Mahasiswa";
+        $data['mahasiswa'] = $this->Mahasiswa_model->getById($id);
+        $this->load->view("layout/header");
+        $this->load->view("prodi/vw_ubah_prodi", $data);
+        $this->load->view("layout/footer");
+    }
+
+    
 }
 
 ?>
