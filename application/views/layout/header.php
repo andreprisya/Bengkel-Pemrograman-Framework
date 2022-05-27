@@ -56,6 +56,8 @@
             </div>
 
             <!-- Nav Item - Charts -->
+            <?php 
+            if ($user['role'] == 'Admin') { ?>
             <li class="nav-item">
                 <a class="nav-link" href="<?= site_url('Mahasiswa/')?>">
                     <i class="fas fa-fw fa-users"></i>
@@ -67,6 +69,22 @@
                     <i class="fas fa-fw fa-users"></i>
                     <span>Prodi</span></a>
             </li>
+
+            <?php } else {
+                ?>
+                <li class="nav-item">
+                <a class="nav-link" href="<?= site_url('Profil/')?>">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Profil</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?= site_url('auth/logout')?>">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Logout</span></a>
+            </li>
+            <?php } 
+            ?>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -257,9 +275,10 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $user['nama']; ?></span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="<?= base_url('assets/img/profile/').$user['gambar']; ?>">
+                                    
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

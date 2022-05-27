@@ -58,6 +58,32 @@ class Auth extends CI_Controller
         }
     }
 
+    public function logout()
+    {
+        $this->session->unset_userdata('email');
+        $this->session->unset_userdata('role');
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil Logout!</div>');
+        redirect('Auth');
+    }
+
+    public function cek_regis()
+    {
+        $data = [
+            'nama' => htmlspecialchars($this->input->post('nama', true)),
+            'email' => htmlspecialchars($this->input->post('email', true)),
+            'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+            'gambar' => 'default.jpg',
+            'role' => "User",
+            'date_created' => time()
+
+        ];
+        $this->userrole->insert($data);
+        $this->session->set_flashdata('message', '<div class="alert alert-success"
+        role="alert">Selamat Akunmu sudah berhasil terdaftar, silahkan login!</div>
+        ');
+        redirect('Auth');
+    }
+
     function registrasi()
     {
         if ($this->session->userdata('email')) {

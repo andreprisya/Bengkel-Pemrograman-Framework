@@ -3,8 +3,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class User_model extends CI_Model
 {
-    public $table = 'User';
-    public $id = 'User.id';
+    public $table = 'user';
+    public $id = 'user.id';
     
     public function __construct()
     {
