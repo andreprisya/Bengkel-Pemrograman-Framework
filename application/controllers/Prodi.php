@@ -84,9 +84,11 @@ class Prodi extends CI_Controller
         $this->Prodi_model->delete($id);
         $error = $this->db->error();
         if ($error['code'] != 0) {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"><i class="icon fas fa-info-circle"></i>Data Prodi tidak dapat dihapus (sudah berelasi)!</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" 
+            role="alert"><i class="icon fas fa-info-circle"></i>Data Prodi tidak dapat dihapus (sudah berelasi)!</div>');
         } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"><i class="icon fas fa-check-circle"></i>Data Prodi Berhasil Dihapus!</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" 
+            role="alert"><i class="icon fas fa-check-circle"></i>Data Prodi Berhasil Dihapus!</div>');
         }
         redirect('Prodi');
     }

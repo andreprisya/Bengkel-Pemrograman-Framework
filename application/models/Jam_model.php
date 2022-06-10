@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Prodi_model extends CI_Model
+class Jam_model extends CI_Model
 {
-    public $table = 'Prodi';
-    public $id = 'Prodi.id';
-    
+    public $table = 'Sembako';
+    public $id = 'Sembako.id';
+
     public function __construct()
     {
         parent::__construct();
@@ -44,6 +44,12 @@ class Prodi_model extends CI_Model
         $this->db->delete($this->table);
         return $this->db->affected_rows();
     }
-}
 
-?>
+    public function min_stok($stok, $idp)
+    {
+        $query = $this->db->set('stok', 'stok-' . $stok, false);
+        $query = $this->db->where('id', $idp);
+        $query = $this->db->update($this->table);
+        return $query;
+    }
+}

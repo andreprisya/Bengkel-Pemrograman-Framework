@@ -9,6 +9,7 @@ class Mahasiswa extends CI_Controller
         $this->load->model('Mahasiswa_model');
         $this->load->model('Prodi_model');
         $this->load->model('User_model');
+        $this->load->model('Keranjang_model');
     }
 
     function index()
@@ -16,6 +17,7 @@ class Mahasiswa extends CI_Controller
         $data['judul'] = "Halaman Mahasiswa";
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['mahasiswa'] = $this->Mahasiswa_model->get();
+        $data['jlh'] = $this->Keranjang_model->jumlah();
         $this->load->view("layout/header", $data);
         $this->load->view("mahasiswa/vw_mahasiswa", $data);
         $this->load->view("layout/footer", $data);
@@ -24,6 +26,7 @@ class Mahasiswa extends CI_Controller
     function tambah()
     {
         $data['judul'] = "Halaman Tambah Mahasiswa";
+        $data['jlh'] = $this->Keranjang_model->jumlah();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['prodi'] = $this->Prodi_model->get();
         $this->form_validation->set_rules('nama', 'Nama Mahasiswa', 'required', [
@@ -137,7 +140,8 @@ class Mahasiswa extends CI_Controller
     public function hapus($id)
     {
         $this->Mahasiswa_model->delete($id);
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Mahasiswa Berhasil Dihapus!</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" 
+        role="alert">Data Mahasiswa Berhasil Dihapus!</div>');
         redirect('Mahasiswa');
     }
 

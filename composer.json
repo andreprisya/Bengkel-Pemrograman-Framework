@@ -11,7 +11,9 @@
 		"source": "https://github.com/bcit-ci/CodeIgniter"
 	},
 	"require": {
-		"php": ">=5.3.7"
+		"php": "^5.3.7||^8.0",
+		"guzzlehttp/guzzle": "^7.4",
+		"dompdf/dompdf": "^1.2"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"

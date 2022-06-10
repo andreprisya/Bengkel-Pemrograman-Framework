@@ -9,6 +9,20 @@ class Auth extends CI_Controller
         $this->load->model('User_model', 'userrole');
     }
 
+    // public function index()
+    // {
+    //     $this->load->view("layout/auth_header");
+    //     $this->load->view("auth/login");
+    //     $this->load->view("layout/auth_footer");
+    // }
+
+    // public function registrasi()
+    // {
+    //     $this->load->view('layout/auth_header');
+    //     $this->load->view('auth/registrasi');
+    //     $this->load->view('layout/auth_footer');
+    // }
+
     public function index()
     {
         if ($this->session->userdata('email')) {
@@ -121,7 +135,8 @@ class Auth extends CI_Controller
                 'date_created' => time()
             ];
             $this->userrole->insert($data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Selamat! Akunmu telah berhasil terdaftar, Silahkan Login! </div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" 
+            role="alert">Selamat! Akunmu telah berhasil terdaftar, Silahkan Login! </div>');
             redirect('auth');
         }
     }
